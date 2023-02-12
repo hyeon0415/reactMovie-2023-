@@ -9,29 +9,28 @@
 <script type="text/babel">
     //Render : js로 element 생성 후 html로
     const root = document.getElementById("root");
-    function Title() {
-        return (
-            <h3 id="title" onMouseEnter={() => console.log("mouse entered")}>
-        Hello I'm a title
-        </h3>
-        );
+
+    let counter = 0;
+    function countUp(){
+        counter = counter + 1;
+        // 화면에 counter를 업데이트하려면 리렌더링해야함    
+        //ReactDOM.render(<Container/>, root);
+        render();
     }
-    const Button = () => (
-        <button
-            style={{
-                backgroundColor: "tomato",
-            }}
-            onClick={() => console.log("im clicked")}
-            >
-            Click me
-            </button>
-    );
-    const Container = () =>(
+    //리로드를 함수화
+    function render(){
+        ReactDOM.render(<Container/>, root);       
+    }
+    function Container() {
         // element명은 대문자로 시작해야함
+        return( 
         <div>
-            <Title/>
-            <Button/>
-        </div>);
-    ReactDOM.render(<Container/>, root);
+            <h3>Total clicks: {counter}</h3>
+            <button onClick={countUp}>Click me</button>                   
+        </div>
+        )
+    };
+    //ReactDOM.render(<Container/>, root);
+    render();
 </script>
 </html>
