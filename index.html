@@ -10,27 +10,17 @@
     //Render : js로 element 생성 후 html로
     const root = document.getElementById("root");
 
-    let counter = 0;
-    function countUp(){
-        counter = counter + 1;
-        // 화면에 counter를 업데이트하려면 리렌더링해야함    
-        //ReactDOM.render(<Container/>, root);
-        render();
-    }
-    //리로드를 함수화
-    function render(){
-        ReactDOM.render(<Container/>, root);       
-    }
-    function Container() {
+    function App() {
+        // 초기값(0), 사용할 함수를 한번에 지정 -> 위에 있는 방식보다 간편
+        const [counter, modifier] = React.useState(0);
         // element명은 대문자로 시작해야함
         return( 
         <div>
             <h3>Total clicks: {counter}</h3>
-            <button onClick={countUp}>Click me</button>                   
+            <button>Click me</button>                   
         </div>
-        )
-    };
-    //ReactDOM.render(<Container/>, root);
-    render();
+        );
+    }
+    ReactDOM.render(<App />, root);   
 </script>
 </html>
