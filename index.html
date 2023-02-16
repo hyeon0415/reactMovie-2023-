@@ -10,14 +10,18 @@
     //Render : js로 element 생성 후 html로
     const root = document.getElementById("root");
 
+    // element명은 대문자로 시작해야함
     function App() {
         // 초기값(0), 사용할 함수를 한번에 지정 -> 위에 있는 방식보다 간편
-        const [counter, modifier] = React.useState(0);
-        // element명은 대문자로 시작해야함
+        const [counter, setCounter] = React.useState(0);
+        const onClick = () => {
+            setCounter(counter + 1);
+        };
+        // component(counter) 내에 있는 특정 값만 수정해줌
         return( 
         <div>
             <h3>Total clicks: {counter}</h3>
-            <button>Click me</button>                   
+            <button onClick={onClick}>Click me</button>                   
         </div>
         );
     }
