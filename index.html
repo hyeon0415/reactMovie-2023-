@@ -12,16 +12,25 @@
 
     // element명은 대문자로 시작해야함
     function App() {
-        // 초기값(0), 사용할 함수를 한번에 지정 -> 위에 있는 방식보다 간편
-        const [counter, setCounter] = React.useState(0);
-        const onClick = () => {
-            setCounter(counter + 1);
+        const [minutes, setMinutes] = React.useState();
+        // 누르는 즉시 컴포넌트 값 변경
+        const onChange = (event) => {
+            setMinutes(event.target.value);
         };
-        // component(counter) 내에 있는 특정 값만 수정해줌
         return( 
         <div>
-            <h3>Total clicks: {counter}</h3>
-            <button onClick={onClick}>Click me</button>                   
+            <h1>Super Converter</h1>
+            <label for="minutes">Minutes</label>
+            <input 
+            value={minutes}
+            id="minutes" 
+            placeholder="Minutes" 
+            type="number"
+            onChange={onChange}
+            />
+            <h4>You want to convert {minutes}</h4>
+            <label for="hours">Hours</label>
+            <input id="hours" placeholder="Hours" type="number"/>     
         </div>
         );
     }
