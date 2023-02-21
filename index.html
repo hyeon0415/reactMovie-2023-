@@ -8,122 +8,32 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
 
-    // element명은 대문자로 시작해야함
-    function MinutesToHours() {
-        const [amount, setAmount] = React.useState(0);
-        const [invert, setInvert] = React.useState(false);
-        // 누르는 즉시 컴포넌트 값 변경
-        const onChange = (event) => {
-            setAmount(event.target.value);
-        };
 
-        const reset = () => setAmount(0);
-        const onFlip = () => {
-            reset();
-            setInvert((current) => !current)
-        };
-        return( 
-        <div>
-            <div>
-                <label for="minutes">Minutes</label>
-                <input 
-                value={invert ? amount * 60 :  amount}
-                id="minutes" 
-                placeholder="Minutes" 
-                type="number"
-                onChange={onChange}
-                // flipped이 true면 disable됨
-                disabled={invert}
-                />                    
-            </div>
-            <div>
-                <label for="hours">Hours</label>
-                <input 
-                    // ? : = flipped된 상태면 현재상태값만 보여줘라
-                    value={invert ? amount : Math.round(amount/60)} 
-                    id="hours" 
-                    placeholder="Hours" 
-                    type="number"
-                    onChange={onChange}
-                    disabled={!invert}
-                    />      
-            </div>
-            <button onClick={reset}>Reset</button>
-            <button onClick={onFlip}>{invert ? "Turn back" : "Invert"}</button>
-        </div>
+
+    function Btn({text, big}) {
+        return( <button style={{
+            backgroundColor: "tomato",
+            color:"white",
+            padding: "10px, 20px",
+            border: 0,
+            borderRadius: 10,
+            fontSize: big ? 18 : 16,
+        }}
+        >
+        {text}
+        </button>
         );
     }
-
-    function KmToMiles() {
-        const [amount, setAmount] = React.useState(0);
-        const [invert, setInvert] = React.useState(false);
-        // 누르는 즉시 컴포넌트 값 변경
-        const onChange = (event) => {
-            setAmount(event.target.value);
-        };
-
-        const reset = () => setAmount(0);
-        const onFlip = () => {
-            reset();
-            setInvert((current) => !current)
-        };
-        return( 
-        <div>
-            <div>
-                <label for="km">KM</label>
-                <input 
-                value={invert ? parseFloat(amount * 1.600934) :  amount}
-                id="km" 
-                placeholder="KM" 
-                type="number"
-                onChange={onChange}
-                // flipped이 true면 disable됨
-                disabled={invert}
-                />                    
-            </div>
-            <div>
-                <label for="Miles">Miles</label>
-                <input 
-                    // ? : = flipped된 상태면 현재상태값만 보여줘라
-                    value={invert ? amount : parseFloat(amount * 0.621371)} 
-                    id="miles" 
-                    placeholder="Miles" 
-                    type="number"
-                    onChange={onChange}
-                    disabled={!invert}
-                    />      
-            </div>
-            <button onClick={reset}>Reset</button>
-            <button onClick={onFlip}>{invert ? "Turn back" : "Invert"}</button>
-        </div>
-        );
-    }
-    // KmToMiles 끝
-
     function App() {
-        const [index, setIndex] = React.useState("xx");
-        const onSelect = (event) => {
-            setIndex(event.target.value);
-        };
-        console.log('render w/', index);
-        return( 
+        return(
         <div>
-           <h1>Super Converter</h1>
-           <select value={index}onChange={onSelect}>
-                <option value="xx">Select your units</option>
-                <option value="0">Minutes & Hours</option>
-                <option value="1">KM & Miles</option>
-            </select>
-            <hr/>
-            {index === "xx" ? "Please select your units" : null}
-            {index === "0" ? <MinutesToHours/> : null}
-            {index === "1" ? <KmToMiles/> : null}
+            <Btn text= "Save Changes" big={true}/>
+            <Btn text= "Continue" big={false}/>     
         </div>
         );
     }
     //Render : js로 element 생성 후 html로
     const root = document.getElementById("root");
-
-    ReactDOM.render(<App />, root);   
-</script>
+    ReactDOM.render(<App />, root);  
+</script> 
 </html>
