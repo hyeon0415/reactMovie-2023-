@@ -11,12 +11,16 @@
 
 
     function Btn({text, big}) {
-        return( <button style={{
+        // 두개의 props(text, big)
+        return( 
+            <button 
+            style={{
             backgroundColor: "tomato",
             color:"white",
             padding: "10px, 20px",
             border: 0,
             borderRadius: 10,
+            // 두번째 props로 조건을 줌 (big = true면 fontSize:18)
             fontSize: big ? 18 : 16,
         }}
         >
