@@ -10,29 +10,35 @@
 
 
 
-    function Btn({text, big}) {
+    function Btn({text, changeValue}) {
         // 두개의 props(text, big)
+        console.log(text, "was rendered");
         return( 
-            <button 
+            <button
+            onClick = {changeValue} 
             style={{
             backgroundColor: "tomato",
             color:"white",
             padding: "10px, 20px",
             border: 0,
             borderRadius: 10,
-            // 두번째 props로 조건을 줌 (big = true면 fontSize:18)
-            fontSize: big ? 18 : 16,
+            fontSize: 10,
         }}
         >
         {text}
         </button>
         );
     }
+
+    // render 될 필요가 없으면 안되게 하는 리액트 기능
+    const MemoBtn = React.memo(Btn);
     function App() {
+        const [value, setValue] = React.useState("Save Changes");
+        const changeValue = () => setValue("Revert Changes");
         return(
         <div>
-            <Btn text= "Save Changes" big={true}/>
-            <Btn text= "Continue" big={false}/>     
+            <MemoBtn text={value} changeValue={changeValue}/> 
+            <MemoBtn text= "Continue" />     
         </div>
         );
     }
